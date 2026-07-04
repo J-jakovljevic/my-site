@@ -70,6 +70,7 @@ const LiveDataVisual = () => {
         <motion.circle
           r="4"
           className="fill-accent"
+          initial={{ cx: points[0][0], cy: points[0][1] }}
           animate={{
             cx: points.map((p) => p[0]),
             cy: points.map((p) => p[1]),

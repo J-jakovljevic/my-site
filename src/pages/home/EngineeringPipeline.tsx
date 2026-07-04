@@ -70,7 +70,7 @@ const EngineeringPipeline = () => {
           <div className="relative min-h-[420px] overflow-hidden rounded-[28px] border border-edge-soft bg-surface p-10 shadow-subtle sm:p-12">
             <span
               aria-hidden="true"
-              style={{ top: -15, right: -8 }}
+              style={{ top: -6, right: -4 }}
               className="font-serif pointer-events-none absolute z-0 text-[144px] leading-[0.8] font-light text-bronze-muted opacity-[0.15] select-none sm:text-[170px]"
             >
               0{activeIndex + 1}

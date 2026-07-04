@@ -4,9 +4,11 @@ import { Outlet, useLocation } from "react-router-dom";
 import Nav from "@components/Nav";
 import Footer from "@components/Footer";
 import ScrollProgress from "@components/ScrollProgress";
+import { useScrollToTop } from "@hooks/useScrollToTop";
 
 const Layout = () => {
   const location = useLocation();
+  useScrollToTop();
 
   return (
     <>
