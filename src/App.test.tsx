@@ -1,8 +1,18 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import App from "@/App";
 
-it('renders heading', () => {
-  render(<App />);
-  const text = screen.getByText(/Hello World!/i);
-  expect(text).toBeTruthy();
+it("renders the home page", () => {
+  render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>,
+  );
+
+  const heading = screen.getByRole("heading", {
+    name: /engineering products/i,
+    level: 1,
+  });
+
+  expect(heading).toBeTruthy();
 });

@@ -10,4 +10,24 @@ export default defineConfig([
   pluginReact.configs.flat.recommended,
   pluginReact.configs.flat["jsx-runtime"],
   { settings: { react: { version: "detect" } } },
+  {
+    files: ["src/components/hero/**/*.tsx", "src/components/HeroVisual.tsx"],
+    rules: {
+      "react/no-unknown-property": [
+        "error",
+        {
+          ignore: [
+            "attach",
+            "args",
+            "vertexShader",
+            "fragmentShader",
+            "transparent",
+            "depthWrite",
+            "blending",
+            "geometry",
+          ],
+        },
+      ],
+    },
+  },
 ]);
