@@ -13,7 +13,7 @@ const ContactHero = () => {
         <div className="relative shrink-0">
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute -top-4 -left-2.5 h-46 w-45"
+            className="pointer-events-none absolute -top-3 -left-2 h-36 w-35 sm:-top-4 sm:-left-2.5 sm:h-46 sm:w-45"
             style={{
               backgroundImage:
                 "radial-gradient(circle, color-mix(in srgb, var(--color-accent) 35%, transparent) 1px, transparent 0.5px)",
@@ -26,7 +26,7 @@ const ContactHero = () => {
             alt={profile.name}
             animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="h-32 w-32 rounded-full object-cover ring-1 sm:h-40 sm:w-40"
+            className="h-32 w-32 min-w-32 rounded-full object-cover ring-1 sm:h-40 sm:w-40 sm:min-w-40"
             style={{
               boxShadow:
                 "0 0 0 1px color-mix(in srgb, var(--color-accent) 20%, transparent)",

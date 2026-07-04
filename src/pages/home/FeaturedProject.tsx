@@ -7,9 +7,9 @@ import { featuredProject } from "@data/homeData";
 const FeaturedProject = () => {
   return (
     <section>
-      <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-2">
+      <div className="grid grid-cols-1 items-center gap-0 md:gap-16 md:grid-cols-2">
         <Reveal>
-          <div className="flex flex-col items-start gap-6">
+          <div className="flex flex-col items-start gap-6 ">
             <p className="text-[12px] font-semibold tracking-[0.25em] text-muted uppercase">
               {featuredProject.label}
             </p>
@@ -32,7 +32,7 @@ const FeaturedProject = () => {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="aspect-square w-full">
+          <div className="mx-auto aspect-square w-full max-w-sm md:mx-0 md:max-w-none">
             <LiveDataVisual />
           </div>
         </Reveal>

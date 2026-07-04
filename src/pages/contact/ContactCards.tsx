@@ -29,8 +29,8 @@ const ContactCards = () => {
       </Reveal>
 
       <Reveal delay={0.1} className="sm:col-span-2">
-        <div className="relative overflow-hidden rounded-3xl border border-transparent bg-surface p-8 shadow-soft transition-shadow duration-300 sm:p-10">
-          <div className="relative z-10 flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="relative overflow-hidden rounded-3xl border border-transparent bg-surface p-4 md:p-7 shadow-soft transition-shadow duration-300 sm:p-10">
+          <div className="relative z-10 flex flex-col items-center gap-8 min-[730px]:flex-row min-[730px]:items-center min-[730px]:justify-between">
             <div className="flex items-start gap-5">
               <span className="bg-accent/10 text-accent flex h-14 w-14 shrink-0 items-center justify-center rounded-full">
                 <PinIcon className="h-6 w-6" />
@@ -59,7 +59,7 @@ const ContactCards = () => {
               </div>
             </div>
 
-            <div className="hidden shrink-0 sm:flex">
+            <div className="shrink-0">
               <WorldMapDots />
             </div>
           </div>

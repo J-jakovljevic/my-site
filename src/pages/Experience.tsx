@@ -30,22 +30,24 @@ const Experience = () => {
                 </div>
 
                 <div className="flex flex-1 flex-col gap-4">
-                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <span className="font-serif text-3xl font-medium text-ink">
+                  <div>
+                    <span className="mr-2 font-serif text-2xl font-medium text-ink sm:text-3xl">
                       {job.year}
                     </span>
 
                     <span className="font-serif text-2xl font-medium">
-                      -{" "}
+                      <span className="mr-2" aria-hidden="true">
+                        -
+                      </span>
                       {job.link ? (
                         <a
                           href={job.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-baseline gap-1 text-ink underline decoration-edge underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+                          className="text-ink underline decoration-edge underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
                         >
                           {job.company}
-                          <span aria-hidden="true" className="text-base">
+                          <span aria-hidden="true" className="ml-1 text-base">
                             ↗
                           </span>
                         </a>

@@ -7,7 +7,7 @@ import HeroQuote from "@pages/home/HeroQuote";
 
 const Home = () => {
   return (
-    <div className="mx-auto flex max-w-5xl flex-col gap-20 px-6 pb-16">
+    <div className="mx-auto flex max-w-5xl flex-col gap-12 px-6 pb-16 md:gap-20">
       <Hero />
       <HeroQuote />
       <ExperienceStats />

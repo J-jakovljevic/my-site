@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useMediaQuery } from "usehooks-ts";
 
 // Some browsers/drivers throw instead of returning null when WebGL is
 // blocked (e.g. GPU blocklisted), so this has to be a try/catch, not just a
@@ -15,23 +16,6 @@ const isWebGLAvailable = () => {
   } catch {
     return false;
   }
-};
-
-const useMediaQuery = (query: string) => {
-  const [matches, setMatches] = useState(
-    () => typeof window !== "undefined" && window.matchMedia(query).matches,
-  );
-
-  useEffect(() => {
-    const mql = window.matchMedia(query);
-    const handler = () => setMatches(mql.matches);
-
-    handler();
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, [query]);
-
-  return matches;
 };
 
 export const useHeroVisual = () => {

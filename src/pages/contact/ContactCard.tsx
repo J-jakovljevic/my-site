@@ -24,7 +24,7 @@ const ContactCard = ({
       target={external ? "_blank" : undefined}
       rel={external ? "noreferrer" : undefined}
       transition={{ type: "spring", duration: 0.3, bounce: 0.15 }}
-      className="group flex h-full items-center gap-5 rounded-3xl border border-transparent bg-surface p-7 shadow-soft transition-shadow duration-300 hover:shadow-accent"
+      className="group flex h-full items-center gap-5 rounded-3xl border border-transparent bg-surface p-4 md:p-7 shadow-soft transition-shadow duration-300 hover:shadow-accent"
     >
       <span className="bg-accent/10 text-accent flex h-14 w-14 shrink-0 items-center justify-center rounded-full">
         {icon}
