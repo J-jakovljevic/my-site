@@ -4,12 +4,17 @@ import { Link } from "react-router-dom";
 import { profile } from "@data/profileData";
 import { PROJECTS } from "@utils/routes";
 
+// Lazy-loaded so the three.js/@react-three/fiber bundle isn't part of the
+// initial page load. It's a decorative visual, not critical content.
 const HeroVisual = lazy(() => import("@components/HeroVisual"));
 
 const Hero = () => {
   return (
     <section className="relative flex min-h-[60vh] pt-45 pb-10 items-center">
       <div className="relative grid w-full grid-cols-1 items-start gap-6 md:grid-cols-[520px_minmax(0,1fr)] md:gap-4">
+        {/* Named variants ("hidden"/"show") propagate down to children that
+        declare the same variant keys, so each motion.p/h1 below only needs
+        its own hidden/show values - the stagger timing lives here once. */}
         <motion.div
           initial="hidden"
           animate="show"

@@ -3,14 +3,13 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 import {
-  ICOSA_EDGES,
   generateAbstractForm,
   generateGrid,
   generateNetwork,
-  generateScattered,
-  normalizedIcosaVertices,
 } from "@utils/particleShapes";
-import { PALETTE, SEGMENT_DURATION } from "@models/particleField";
+import { PALETTE, SEGMENT_DURATIONS } from "@models/particleField";
+
+const TOTAL_DURATION = SEGMENT_DURATIONS.reduce((sum, d) => sum + d, 0);
 
 type UseParticleFieldParams = {
   count: number;
@@ -25,12 +24,10 @@ export const useParticleField = ({
 }: UseParticleFieldParams) => {
   const groupRef = useRef<THREE.Group>(null);
   const pointsRef = useRef<THREE.Points>(null);
-  const lineMaterialRef = useRef<THREE.LineBasicMaterial>(null);
   const autoRotation = useRef(0);
 
   const shapes = useMemo(
     () => [
-      generateScattered(count),
       generateGrid(count),
       generateNetwork(count),
       generateAbstractForm(count),
@@ -38,6 +35,25 @@ export const useParticleField = ({
     [count],
   );
 
+  // Segments can have different durations, so we can't just divide elapsed
+  // time evenly. Walk the cumulative durations to find which stage we're
+  // in and how far through it we are.
+  const segmentAt = (elapsed: number) => {
+    let t = elapsed % TOTAL_DURATION;
+
+    for (let seg = 0; seg < SEGMENT_DURATIONS.length; seg++) {
+      if (t < SEGMENT_DURATIONS[seg]) {
+        return { seg, rawT: t / SEGMENT_DURATIONS[seg] };
+      }
+      t -= SEGMENT_DURATIONS[seg];
+    }
+
+    return { seg: SEGMENT_DURATIONS.length - 1, rawT: 0 };
+  };
+
+  // Smoother variant of smoothstep (zero 1st AND 2nd derivative at the
+  // edges), so the morph between shapes eases in/out without a visible
+  // "kick" at the start/end of each stage.
   const smootherstep = (t: number) => {
     return t * t * t * (t * (t * 6 - 15) + 10);
   };
@@ -69,21 +85,6 @@ export const useParticleField = ({
     return arr;
   }, [count]);
 
-  const edgeGeometry = useMemo(() => {
-    const verts = normalizedIcosaVertices(2.0);
-    const arr = new Float32Array(ICOSA_EDGES.length * 2 * 3);
-
-    ICOSA_EDGES.forEach(([ai, bi], i) => {
-      arr.set(verts[ai], i * 6);
-      arr.set(verts[bi], i * 6 + 3);
-    });
-
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute("position", new THREE.BufferAttribute(arr, 3));
-
-    return geo;
-  }, []);
-
   useFrame((state, delta) => {
     const geo = pointsRef.current?.geometry;
     const posAttr = geo?.attributes.position as
@@ -91,22 +92,27 @@ export const useParticleField = ({
       | undefined;
     const t = state.clock.elapsedTime;
 
-    let cycle = 0;
     if (posAttr) {
       const arr = posAttr.array as Float32Array;
 
       if (reducedMotion) {
+        // Freeze on the grid stage instead of the midpoint of a morph -
+        // it's the most legible, "settled" shape for users who opted out
+        // of motion.
         const shape = shapes[1];
         arr.set(shape);
       } else {
-        cycle = (t / SEGMENT_DURATION) % shapes.length;
-        const seg = Math.floor(cycle);
-        const localT = smootherstep(cycle - seg);
+        const { seg, rawT } = segmentAt(t);
+        const localT = smootherstep(rawT);
         const a = shapes[seg];
         const b = shapes[(seg + 1) % shapes.length];
 
         for (let i = 0; i < count; i++) {
           const i3 = i * 3;
+
+          // Per-particle phase offset so the "breathing" jitter isn't
+          // perfectly in sync across all particles - reads as organic
+          // rather than a single pulsing blob.
           const breathe = 1 + Math.sin(t * 0.6 + phases[i]) * 0.012;
           arr[i3] = THREE.MathUtils.lerp(a[i3], b[i3], localT) * breathe;
           arr[i3 + 1] =
@@ -119,10 +125,19 @@ export const useParticleField = ({
     }
 
     if (groupRef.current) {
+      // autoRotation is accumulated in a ref (not state) so it survives
+      // across frames without triggering re-renders every tick.
       if (!reducedMotion) autoRotation.current += delta * 0.045;
+
+      // `interactive` is false on mobile (no meaningful hover/pointer), so
+      // the tilt-toward-cursor effect is skipped there rather than reacting
+      // to touch position.
       const mouseX = interactive && !reducedMotion ? state.pointer.x * 0.18 : 0;
       const mouseY = interactive && !reducedMotion ? state.pointer.y * 0.1 : 0;
 
+      // Lerp toward the target rotation instead of setting it directly, so
+      // mouse movement and auto-rotation both feel smoothed rather
+      // than snapping frame to frame.
       groupRef.current.rotation.y = THREE.MathUtils.lerp(
         groupRef.current.rotation.y,
         autoRotation.current + mouseX,
@@ -137,25 +152,13 @@ export const useParticleField = ({
       const breatheScale = reducedMotion ? 1 : 1 + Math.sin(t * 0.5) * 0.025;
       groupRef.current.scale.setScalar(breatheScale);
     }
-
-    if (lineMaterialRef.current) {
-      const distToNetwork = Math.min(
-        Math.abs(cycle - 2),
-        shapes.length - Math.abs(cycle - 2),
-      );
-      lineMaterialRef.current.opacity = reducedMotion
-        ? 0
-        : Math.max(0, 1 - distToNetwork) * 0.22;
-    }
   });
 
   return {
     groupRef,
     pointsRef,
-    lineMaterialRef,
     positions,
     colors,
     sizes,
-    edgeGeometry,
   };
 };

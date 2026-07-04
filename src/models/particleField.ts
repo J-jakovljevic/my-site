@@ -1,14 +1,17 @@
 import { THEME_COLORS } from "@utils/theme";
 
-// Warm bronze / beige only - no bright, neon or accent-orange tones
 export const PALETTE = [
   THEME_COLORS.particleBronze,
   THEME_COLORS.particleSand,
   THEME_COLORS.particleUmber,
   THEME_COLORS.edge,
 ];
-export const SEGMENT_DURATION = 9; // seconds per morph between stages
 
+// Seconds spent morphing into each stage: grid -> network -> abstract
+export const SEGMENT_DURATIONS = [5, 8, 8];
+
+// Scales point size by inverse distance from the camera (perspective-correct
+// sizing), since plain gl_PointSize doesn't do this on its own.
 export const VERTEX_SHADER = /* glsl */ `
   attribute vec3 color;
   attribute float aSize;
@@ -21,6 +24,8 @@ export const VERTEX_SHADER = /* glsl */ `
   }
 `;
 
+// Draws each point as a soft circular sprite: discards anything outside the
+// point's circle, then fades opacity toward the edge instead of a hard cutoff.
 export const FRAGMENT_SHADER = /* glsl */ `
   varying vec3 vColor;
   void main() {

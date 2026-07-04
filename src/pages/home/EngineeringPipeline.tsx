@@ -76,6 +76,9 @@ const EngineeringPipeline = () => {
               0{activeIndex + 1}
             </span>
 
+            {/* mode="wait" makes the outgoing stage fully exit before the
+            new one enters, instead of cross-fading, otherwise switching
+            tabs quickly would overlap two stages' content. */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={stage.title}
@@ -106,11 +109,7 @@ const EngineeringPipeline = () => {
                         key={r}
                         className="flex items-start gap-6 text-base text-ink/75"
                       >
-                        <span
-                          className="w-4 shrink-0 text-bronze"
-                        >
-                          →
-                        </span>
+                        <span className="w-4 shrink-0 text-bronze">→</span>
                         <span className="leading-relaxed">{r}</span>
                       </li>
                     ))}

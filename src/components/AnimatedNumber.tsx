@@ -7,6 +7,10 @@ const AnimatedNumber = ({ value }: { value: string }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
+  // value is a display string like "4+" or "10+" - split off the leading
+  // number so it can be counted up, keeping the rest ("+") as a static
+  // suffix. Falls back to rendering the whole string if there's no leading
+  // number to animate.
   const match = value.match(/^(\d+)(.*)$/);
   const target = match ? parseInt(match[1], 10) : null;
   const suffix = match ? match[2] : value;

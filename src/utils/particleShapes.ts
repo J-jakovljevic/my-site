@@ -1,4 +1,4 @@
-// Four "stages" a particle field can morph through, each returning a flat
+// Three "stages" a particle field can morph through, each returning a flat
 // Float32Array of [x, y, z, x, y, z, ...] of identical length so positions
 // can be linearly interpolated between any two stages.
 
@@ -62,26 +62,7 @@ export const normalizedIcosaVertices = (
   });
 };
 
-/** Stage 1 - chaos: uniformly scattered points inside a sphere. */
-export const generateScattered = (
-  count: number,
-  radius = 2.3,
-): Float32Array => {
-  const positions = new Float32Array(count * 3);
-
-  for (let i = 0; i < count; i++) {
-    const r = radius * Math.cbrt(Math.random());
-    const theta = Math.random() * Math.PI * 2;
-    const phi = Math.acos(2 * Math.random() - 1);
-    positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-    positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-    positions[i * 3 + 2] = r * Math.cos(phi);
-  }
-
-  return positions;
-};
-
-/** Stage 2 - architecture: a structured, evenly spaced 3D lattice. */
+/** Stage 1 - architecture: a structured, evenly spaced 3D lattice. */
 export const generateGrid = (count: number, size = 1.9): Float32Array => {
   const positions = new Float32Array(count * 3);
   const dim = Math.max(2, Math.ceil(Math.cbrt(count)));
@@ -111,7 +92,7 @@ export const generateGrid = (count: number, size = 1.9): Float32Array => {
   return positions;
 };
 
-/** Stage 3 - implementation: particles distributed along the edges of an
+/** Stage 2 - implementation: particles distributed along the edges of an
  * icosahedron, reading as a connected node/edge network. */
 export const generateNetwork = (count: number, radius = 2.0): Float32Array => {
   const positions = new Float32Array(count * 3);
@@ -143,7 +124,7 @@ export const generateNetwork = (count: number, radius = 2.0): Float32Array => {
   return positions;
 };
 
-/** Stage 4 - production: particles tracing a (2,3) torus knot, an elegant
+/** Stage 3 - production: particles tracing a (2,3) torus knot, an elegant
  * abstract three-dimensional form. */
 export const generateAbstractForm = (
   count: number,

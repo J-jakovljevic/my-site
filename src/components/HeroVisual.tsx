@@ -20,7 +20,11 @@ const HeroVisual = () => {
           alpha: true,
           powerPreference: "high-performance",
         }}
-        camera={{ position: [0, 0, 5.4], fov: 42 }}
+        // z: 6.6 gives enough vertical margin at fov 42 so the widest shape
+        // (radius ~2.0-2.2) isn't clipped by the viewport edges once the
+        // breathing scale and rotation are applied - don't shrink this
+        // without re-checking the largest shape still fits.
+        camera={{ position: [0, 0, 6.6], fov: 42 }}
         aria-hidden="true"
       >
         <Suspense fallback={null}>

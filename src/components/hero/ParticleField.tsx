@@ -2,7 +2,6 @@ import * as THREE from "three";
 
 import { useParticleField } from "@hooks/useParticleField";
 import { VERTEX_SHADER, FRAGMENT_SHADER } from "@models/particleField";
-import { THEME_COLORS } from "@utils/theme";
 
 type ParticleFieldProps = {
   count: number;
@@ -15,15 +14,11 @@ const ParticleField = ({
   reducedMotion,
   interactive,
 }: ParticleFieldProps) => {
-  const {
-    groupRef,
-    pointsRef,
-    lineMaterialRef,
-    positions,
-    colors,
-    sizes,
-    edgeGeometry,
-  } = useParticleField({ count, reducedMotion, interactive });
+  const { groupRef, pointsRef, positions, colors, sizes } = useParticleField({
+    count,
+    reducedMotion,
+    interactive,
+  });
 
   return (
     <group ref={groupRef}>
@@ -42,15 +37,6 @@ const ParticleField = ({
           blending={THREE.NormalBlending}
         />
       </points>
-
-      <lineSegments geometry={edgeGeometry}>
-        <lineBasicMaterial
-          ref={lineMaterialRef}
-          color={THEME_COLORS.particleBronze}
-          transparent
-          opacity={0}
-        />
-      </lineSegments>
     </group>
   );
 };

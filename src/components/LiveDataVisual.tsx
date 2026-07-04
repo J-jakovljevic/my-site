@@ -42,6 +42,8 @@ const LiveDataVisual = () => {
         strokeWidth="1.5"
       />
 
+      {/* Animating pathLength from 0 to 1 draws the stroke along the path
+      over time, like a pen tracing the line, rather than fading it in. */}
       <motion.path
         d={linePath}
         className="fill-none stroke-accent"
@@ -62,6 +64,9 @@ const LiveDataVisual = () => {
       />
 
       {!prefersReducedMotion && (
+        // cx/cy each take the full points array as keyframes, so the dot
+        // travels through every point in sequence on one continuous,
+        // looping timeline instead of needing per-segment animations.
         <motion.circle
           r="4"
           className="fill-accent"
