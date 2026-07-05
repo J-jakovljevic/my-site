@@ -8,7 +8,7 @@ export const PALETTE = [
 ];
 
 // Seconds spent morphing into each stage: grid -> network -> abstract
-export const SEGMENT_DURATIONS = [5, 8, 8];
+export const SEGMENT_DURATIONS = [5, 9, 9];
 
 // Scales point size by inverse distance from the camera (perspective-correct
 // sizing), since plain gl_PointSize doesn't do this on its own.

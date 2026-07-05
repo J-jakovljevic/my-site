@@ -23,10 +23,11 @@ export const useHeroVisual = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [webglSupported] = useState(isWebGLAvailable);
 
-  // Lower particle count and cap device pixel ratio at 1 on mobile - phone
-  // GPUs struggle with the full desktop density at high DPR.
-  const count = isMobile ? 700 : 3000;
-  const dpr: [number, number] = isMobile ? [1, 1] : [1, 2];
+  // Lower particle count on mobile - phone GPUs struggle with the full
+  // desktop density. dpr is left at [1, 2] on both so phones with a retina
+  // screen (the vast majority) don't render the canvas at half resolution.
+  const count = isMobile ? 2000 : 3000;
+  const dpr: [number, number] = [1, 2];
 
   return { reducedMotion, isMobile, webglSupported, count, dpr };
 };
