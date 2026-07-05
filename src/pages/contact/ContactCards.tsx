@@ -1,10 +1,19 @@
 import Reveal from "@components/Reveal";
 import { profile } from "@data/profileData";
+import { useCurrentTime } from "@hooks/useCurrentTime";
 import ContactCard from "@pages/contact/ContactCard";
-import { LinkedInIcon, MailIcon, PinIcon } from "@utils/icons";
+import {
+  GitHubIcon,
+  LinkedInIcon,
+  MailIcon,
+  PhoneIcon,
+  PinIcon,
+} from "@utils/icons";
 import WorldMapDots from "@pages/contact/WorldMapDots";
 
 const ContactCards = () => {
+  const { clock, zone } = useCurrentTime(profile.timezone);
+
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
       <Reveal>
@@ -28,6 +37,26 @@ const ContactCards = () => {
         />
       </Reveal>
 
+      <Reveal delay={0.05}>
+        <ContactCard
+          href={profile.github}
+          external
+          icon={<GitHubIcon className="h-6 w-6" />}
+          label="GitHub"
+          value={profile.github.replace("https://", "")}
+          helper="Check out my code!"
+        />
+      </Reveal>
+
+      <Reveal delay={0.05}>
+        <ContactCard
+          icon={<PhoneIcon className="h-6 w-6" />}
+          label="Phone"
+          value={profile.phone}
+          helper="Reach out if it's urgent."
+        />
+      </Reveal>
+
       <Reveal delay={0.1} className="sm:col-span-2">
         <div className="relative overflow-hidden rounded-3xl border border-transparent bg-surface p-4 md:p-7 shadow-soft transition-shadow duration-300 sm:p-10">
           <div className="relative z-10 flex flex-col items-center gap-8 min-[730px]:flex-row min-[730px]:items-center min-[730px]:justify-between">
@@ -48,6 +77,11 @@ const ContactCards = () => {
                 <p className="text-base text-muted">
                   Remote-first <span className="text-accent">•</span> Available
                   worldwide
+                </p>
+
+                <p className="text-base text-muted">
+                  Current time for me is {clock}
+                  <span className="text-accent ml-1">({zone})</span>
                 </p>
 
                 <div className="h-px w-full max-w-xs bg-edge" />
