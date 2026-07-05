@@ -1,15 +1,35 @@
+import { useRef } from "react";
+import { motion, useScroll } from "framer-motion";
+
 import Reveal from "@components/Reveal";
 import { experience } from "@data/experienceData";
 
 const Experience = () => {
+  const timelineRef = useRef<HTMLDivElement>(null);
+
+  // Used directly (no useSpring smoothing): a spring keeps re-simulating on
+  // the main thread every frame while it's catching up to a new scroll
+  // position, which was competing with the pulsing dots for frame time and
+  // made them stutter specifically while scrolling.
+  const { scrollYProgress: fillScale } = useScroll({
+    target: timelineRef,
+    offset: ["start end", "end start"],
+  });
+
   return (
     <section className="mx-auto flex max-w-5xl flex-col gap-12 px-6 py-14">
       <Reveal>
         <h1 className="font-serif text-4xl font-medium">Experience</h1>
       </Reveal>
 
-      <div className="relative">
-        <div className="absolute top-2 bottom-2 left-2 w-px bg-edge/50 sm:left-2.5" />
+      <div ref={timelineRef} className="relative">
+        <div className="absolute top-2 bottom-2 left-2 h-[calc(100%-1rem)] w-px bg-edge/50 sm:left-2.5" />
+
+        {/* Fills in from the top as the timeline scrolls through view */}
+        <motion.div
+          className="absolute top-2 left-2 h-[calc(100%-1rem)] w-px origin-top bg-accent sm:left-2.5"
+          style={{ scaleY: fillScale }}
+        />
 
         <div className="flex flex-col divide-y divide-edge">
           {experience.map((job, i) => (
@@ -20,13 +40,23 @@ const Experience = () => {
             >
               <div className="relative flex gap-6 sm:gap-8">
                 <div className="flex w-4 shrink-0 justify-center pt-1.5 sm:w-5">
-                  <span
-                    className={`h-3.5 w-3.5 rounded-full ring-4 ring-canvas ${
-                      job.outlineDot
-                        ? "border-2 border-accent bg-canvas"
-                        : "bg-accent"
-                    }`}
-                  />
+                  <span className="relative flex h-3.5 w-3.5">
+                    <span
+                      aria-hidden="true"
+                      style={{ animationDelay: `${i * 0.15}s` }}
+                      className={`animate-pulse-ring absolute -inset-1 rounded-full ${
+                        job.outlineDot ? "bg-accent/60" : "bg-accent"
+                      }`}
+                    />
+
+                    <span
+                      className={`relative h-3.5 w-3.5 rounded-full ring-4 ring-canvas ${
+                        job.outlineDot
+                          ? "border-2 border-accent bg-canvas"
+                          : "bg-accent"
+                      }`}
+                    />
+                  </span>
                 </div>
 
                 <div className="flex flex-1 flex-col gap-4">
