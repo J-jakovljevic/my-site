@@ -50,7 +50,7 @@ const Nav = () => {
 
   return (
     <header className="sticky top-0 z-20 border-b border-edge bg-canvas/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-8 px-6 py-8">
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-8 px-6 pt-6 md:pt-8 pb-5">
         <MotionNavLink
           to={HOME}
           end
@@ -97,7 +97,7 @@ const Nav = () => {
                   <NavLink
                     to={link.to}
                     end={link.end}
-                    className={`block min-w-[190px] border-t border-r border-l px-8 pt-2.5 pb-3 text-right text-[11px] font-light tracking-[0.18em] uppercase transition-colors ${
+                    className={`block min-w-[190px] border-t border-r border-l pl-8 pr-3 pt-2.5 pb-3 text-right text-[11px] font-light tracking-[0.18em] uppercase transition-colors ${
                       isActive
                         ? "border-ink text-ink"
                         : "border-edge text-muted hover:border-ink hover:text-ink"
