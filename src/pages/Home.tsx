@@ -4,6 +4,7 @@ import ExperienceStats from "@pages/home/ExperienceStats";
 import FeaturedProject from "@pages/home/FeaturedProject";
 import Hero from "@pages/home/Hero";
 import HeroQuote from "@pages/home/HeroQuote";
+import Testimonials from "@pages/home/Testimonials";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <ExperienceStats />
       <EngineeringPipeline />
       <FeaturedProject />
+      <Testimonials />
       <ClosingStatement />
     </div>
   );

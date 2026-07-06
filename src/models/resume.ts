@@ -28,3 +28,10 @@ export type PipelineStage = {
   responsibilities: string[];
   technologies: string[];
 };
+
+export type Testimonial = {
+  quote: string[];
+  name: string;
+  title: string;
+  source?: string;
+};

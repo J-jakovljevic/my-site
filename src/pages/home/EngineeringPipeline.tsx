@@ -12,7 +12,7 @@ const EngineeringPipeline = () => {
   const stage = buildPipeline[activeIndex];
 
   return (
-    <section className="flex flex-col gap-14">
+    <section className="flex flex-col gap-10">
       <Reveal>
         <p className="text-[12px] font-semibold tracking-[0.25em] text-muted uppercase">
           My Engineering Workflow

@@ -9,7 +9,7 @@ const FeaturedProject = () => {
     <section>
       <div className="grid grid-cols-1 items-center gap-0 md:gap-16 md:grid-cols-2">
         <Reveal>
-          <div className="flex flex-col items-start gap-6 ">
+          <div className="flex flex-col items-start gap-10 ">
             <p className="text-[12px] font-semibold tracking-[0.25em] text-muted uppercase">
               {featuredProject.label}
             </p>
