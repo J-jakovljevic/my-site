@@ -20,9 +20,9 @@ const Projects = () => {
       <Reveal delay={0.05}>
         <p className="max-w-3xl text-lg text-muted">
           Most of my work has been for clients under NDA, so I can&rsquo;t share
-          product names or live links for those. But here&rsquo;s a closer look at
-          what I actually built and owned! One project below was private and not
-          under NDA, so it comes with a live link.
+          product names or live links for those. But here&rsquo;s a closer look
+          at what I actually built and owned! Where I could, I&rsquo;ve added a
+          live link or a GitHub repo.
         </p>
       </Reveal>
 
@@ -83,7 +83,7 @@ const Projects = () => {
                   rel="noreferrer"
                   className="mt-3 inline-flex w-fit items-center gap-1 text-base font-medium"
                 >
-                  Visit site ↗
+                  {project.linkLabel ?? "Visit site"} ↗
                 </a>
               )}
             </div>
