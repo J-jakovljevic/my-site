@@ -53,7 +53,7 @@ const ContactCards = () => {
           icon={<PhoneIcon className="h-6 w-6" />}
           label="Phone"
           value={profile.phone}
-          helper="Reach out if it's urgent."
+          helper="Available on WhatsApp."
         />
       </Reveal>
 
