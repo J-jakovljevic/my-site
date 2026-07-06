@@ -7,7 +7,7 @@ export const profile = {
   phone: "+381 69 1590 177",
   location: "Serbia",
   timezone: "Europe/Belgrade",
-  cvUrl: "/cv.pdf",
+  cvUrl: "/Jovana Jakovljevic.pdf",
   heroHeadline: "Engineering products from architecture to production",
   summary: "Ownership. Product mindset. Mentorship.",
   tagline: `"Clean architecture isn't a bonus. It's part of the definition of done."`,
