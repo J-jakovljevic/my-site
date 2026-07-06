@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 
 import Nav from "@components/Nav";
 import Footer from "@components/Footer";
+import ScrollCue from "@components/ScrollCue";
 import ScrollProgress from "@components/ScrollProgress";
 import { useScrollToTop } from "@hooks/useScrollToTop";
 
@@ -15,6 +16,8 @@ const Layout = () => {
       <ScrollProgress />
 
       <Nav />
+
+      <ScrollCue />
 
       <main className="relative overflow-hidden">
         <AnimatePresence mode="wait">
