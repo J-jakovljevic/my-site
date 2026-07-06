@@ -135,6 +135,6 @@ export const testimonials: Testimonial[] = [
 ];
 
 export const closingStatement = {
-  message: "Let’s build software people actually use  🚀",
+  message: "Let’s build software people actually use!",
   ctaLabel: "Get in touch",
 };
