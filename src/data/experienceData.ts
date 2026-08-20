@@ -9,7 +9,7 @@ export const experience: Experience[] = [
     period: "06/2026 – Present",
     focus: "Frontend / Full-stack",
     context:
-      "Working directly with clients on short-term engagements and independent projects, focusing on responsive web apps, performance and architecture. I also design websites and handle production deployment for clients.",
+      "Building production-ready web applications for clients, from design to deployment.",
     technologies: [
       "React",
       "TypeScript",
@@ -20,8 +20,9 @@ export const experience: Experience[] = [
       "CI/CD",
     ],
     highlights: [
-      "Delivering production-ready features for small and medium clients",
-      "Performing end-to-end implementation, design and deployment",
+      "Developing and delivering responsive web applications using React and TypeScript.",
+      "Owning projects end-to-end, from requirements and implementation to deployment and final delivery.",
+      "Working directly with clients to translate business requirements into polished, production-ready solutions.",
     ],
   },
   {
