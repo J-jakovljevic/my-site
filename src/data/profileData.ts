@@ -3,7 +3,7 @@ export const profile = {
   title: "Software Engineer - Frontend & Full-Stack",
   email: "jovanajako@icloud.com",
   linkedin: "https://linkedin.com/in/j-jakovljevic",
-  github: "https://github.com/J-jakovljevic",
+  github: "https://github.com/j-jakovljevic",
   phone: "+381 69 1590 177",
   location: "Serbia",
   timezone: "Europe/Belgrade",

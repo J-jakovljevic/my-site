@@ -77,7 +77,10 @@ const Experience = () => {
                           className="text-ink underline decoration-edge underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
                         >
                           {job.company}
-                          <span aria-hidden="true" className="ml-1 text-base">
+                          <span
+                            aria-hidden="true"
+                            className="ml-1 text-base text-ink"
+                          >
                             ↗
                           </span>
                         </a>

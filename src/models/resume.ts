@@ -20,6 +20,7 @@ export type Project = {
   description: string;
   technologies: string[];
   link?: string;
+  github?: string;
   linkLabel?: string;
 };
 

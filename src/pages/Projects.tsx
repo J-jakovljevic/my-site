@@ -76,16 +76,29 @@ const Projects = () => {
                 {project.description}
               </p>
 
-              {project.link && (
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-3 inline-flex w-fit items-center gap-1 text-base font-medium"
-                >
-                  {project.linkLabel ?? "Visit site"} ↗
-                </a>
-              )}
+              <div className="mt-3 flex flex-wrap items-center gap-3">
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex w-fit items-center gap-1 text-base font-medium"
+                  >
+                    {project.linkLabel ?? "Visit site"} ↗
+                  </a>
+                )}
+
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex w-fit items-center gap-1 text-base font-medium"
+                  >
+                    View on GitHub ↗
+                  </a>
+                )}
+              </div>
             </div>
 
             <div className="relative sm:w-56 sm:shrink-0">

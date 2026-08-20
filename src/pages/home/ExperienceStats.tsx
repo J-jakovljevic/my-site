@@ -1,12 +1,14 @@
 import AnimatedNumber from "@components/AnimatedNumber";
 import Reveal from "@components/Reveal";
+import { Link } from "react-router-dom";
+import { EXPERIENCE } from "@utils/routes";
 import { highlights } from "@data/homeData";
 
 const ExperienceStats = () => {
   return (
     <section className="flex flex-col gap-8">
       <Reveal>
-        <p className="text-xs font-medium tracking-widest text-muted uppercase">
+        <p className="text-xs font-semibold tracking-widest text-muted uppercase">
           Experience in numbers
         </p>
       </Reveal>
@@ -23,6 +25,16 @@ const ExperienceStats = () => {
             </div>
           </Reveal>
         ))}
+      </div>
+
+      <div className="mt-6 flex justify-center">
+        <Link
+          to={EXPERIENCE}
+          className="inline-flex items-center gap-3 rounded-full border border-ink bg-ink/5 px-5 py-2 text-sm font-medium text-ink transition-colors hover:bg-ink/10"
+        >
+          View full experience
+          <span className="text-accent">→</span>
+        </Link>
       </div>
     </section>
   );

@@ -3,7 +3,7 @@ import type { PipelineStage, Testimonial } from "@models/resume";
 export const highlights = [
   { label: "Years", value: "4+" },
   { label: "Projects", value: "10+" },
-  { label: "Industries", value: "7" },
+  { label: "Industries", value: "8" },
 ];
 
 export const buildPipeline: PipelineStage[] = [
