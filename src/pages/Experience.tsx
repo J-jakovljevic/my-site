@@ -79,9 +79,23 @@ const Experience = () => {
                           {job.company}
                           <span
                             aria-hidden="true"
-                            className="ml-1 text-base text-ink"
+                            className="ml-1 inline-block align-middle"
                           >
-                            ↗
+                            <svg
+                              width="1em"
+                              height="1em"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth={1.5}
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              focusable="false"
+                              aria-hidden="true"
+                            >
+                              <path d="M7 17L17 7" />
+                              <polyline points="7 7 17 7 17 17" />
+                            </svg>
                           </span>
                         </a>
                       ) : (
